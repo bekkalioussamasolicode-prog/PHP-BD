@@ -1,5 +1,5 @@
 <?php
-require_once "info.php";
+require_once "C:\Users\Solicode\Desktop\Repo\connextion\info.php";
 
 try {
   $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
