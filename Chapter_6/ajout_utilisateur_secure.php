@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../Chapter_2/connexion.php";
+require "connextion.php";
 try {
   if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($_POST['nom']) && !empty($_POST['email'])) {
