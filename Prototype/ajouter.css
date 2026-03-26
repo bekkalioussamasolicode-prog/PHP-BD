@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream:   #f5f0e8;
+  --ink:     #1a1410;
+  --red:     #c0392b;
+  --gold:    #c8a84b;
+  --muted:   #7a6e62;
+  --border:  #ddd5c5;
+  --focus:   #c0392b;
+  --card-bg: #ffffff;
+  --shadow:  0 4px 40px rgba(26,20,16,.10);
+}
+
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--cream);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+
+/* ─── Error message ──────────────────────────────────────────── */
+body > p {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fdf0ee;
+  border-left: 4px solid var(--red);
+  color: var(--red);
+  font-size: .88rem;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 0 6px 6px 0;
+  white-space: nowrap;
+  animation: slideDown .35s ease;
+  z-index: 100;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ─── Form Card ──────────────────────────────────────────────── */
+form {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  animation: riseUp .5s cubic-bezier(.22,.68,0,1.2) both;
+}
+
+@keyframes riseUp {
+  from { opacity: 0; transform: translateY(28px) scale(.98); }
+  to   { opacity: 1; transform: translateY(0)   scale(1);   }
+}
+
+/* ─── Form Header ────────────────────────────────────────────── */
+form::before {
+  content: 'Nouveau produit';
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  color: #fff;
+  background: var(--red);
+  padding: 28px 40px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Form Body ──────────────────────────────────────────────── */
+form {
+  display: grid; /* overrides flex */
+}
+
+/* wrapper for fields (everything except the button) */
+form label,
+form input {
+  display: block;
+}
+
+/* Fields container — we pad the inner area */
+form label:first-of-type {
+  margin-top: 32px;
+}
+
+form label {
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 40px 8px;
+  transition: color .2s;
+}
+
+form input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .95rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  padding: 13px 16px;
+  margin: 0 40px 24px;
+  width: calc(100% - 80px);
+  outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+
+form input::placeholder {
+  color: #bbb0a4;
+}
+
+form input:focus {
+  border-color: var(--focus);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(192,57,43,.10);
+}
+
+/* Highlight the label of a focused input */
+form input:focus + label,
+form label:has(+ input:focus) {
+  color: var(--red);
+}
+
+/* last input before the button */
+form input:last-of-type {
+  margin-bottom: 32px;
+}
+
+/* ─── Submit Button ──────────────────────────────────────────── */
+button.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .85rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ink);
+  border: none;
+  cursor: pointer;
+  padding: 18px 40px;
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  transition: background .22s;
+  position: relative;
+  overflow: hidden;
+}
+
+button.btn::after {
+  content: '→';
+  font-size: 1.1rem;
+  transition: transform .2s ease;
+}
+
+button.btn:hover {
+  background: var(--red);
+}
+
+button.btn:hover::after {
+  transform: translateX(5px);
+}
+
+button.btn:active {
+  background: var(--red-dark, #922b21);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  form::before { padding: 22px 24px 20px; font-size: 1.4rem; }
+  form label   { margin: 0 24px 8px; }
+  form input   { margin: 0 24px 20px; width: calc(100% - 48px); }
+  form input:last-of-type { margin-bottom: 24px; }
+  button.btn   { padding: 16px 24px; }
+}

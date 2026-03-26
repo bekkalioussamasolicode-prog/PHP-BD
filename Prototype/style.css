@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ─── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --cream:     #f5f0e8;
+  --ink:       #1a1410;
+  --red:       #c0392b;
+  --red-dark:  #922b21;
+  --gold:      #c8a84b;
+  --muted:     #7a6e62;
+  --border:    #ddd5c5;
+  --card-bg:   #ffffff;
+  --shadow:    0 2px 24px rgba(26,20,16,.08);
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  padding: 0 0 80px;
+  /* subtle grain overlay */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+}
+
+/* ─── Header ────────────────────────────────────────────────── */
+body > h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  color: var(--card-bg);
+  background: var(--red);
+  padding: 40px 60px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+body > h2::after {
+  content: 'MARJANE';
+  position: absolute;
+  right: 40px;
+  bottom: -14px;
+  font-size: 7rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.06);
+  pointer-events: none;
+  letter-spacing: -.04em;
+}
+
+/* ─── Success message ────────────────────────────────────────── */
+.succ {
+  margin: 28px 60px 0;
+  padding: 14px 22px;
+  background: #eafaf1;
+  border-left: 4px solid #27ae60;
+  color: #1e8449;
+  font-size: .9rem;
+  font-weight: 500;
+  border-radius: 0 6px 6px 0;
+  animation: slideIn .4s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Product Grid ───────────────────────────────────────────── */
+.cont {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 22px 28px;
+  margin: 0 60px;
+  box-shadow: var(--shadow);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  animation: fadeUp .45s ease both;
+}
+
+/* staggered reveal */
+.cont:nth-child(1) { animation-delay: .05s; }
+.cont:nth-child(2) { animation-delay: .10s; }
+.cont:nth-child(3) { animation-delay: .15s; }
+.cont:nth-child(4) { animation-delay: .20s; }
+.cont:nth-child(5) { animation-delay: .25s; }
+.cont:nth-child(n+6) { animation-delay: .30s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cont + .cont {
+  margin-top: 2px;
+}
+
+/* first card gets a top margin after the header */
+body > .cont:first-of-type,
+.succ + .cont {
+  margin-top: 32px;
+}
+
+/* stack cards flush, add top gap only at the first one */
+body > h2 + .cont,
+body > h2 + p + .cont {
+  margin-top: 32px;
+}
+
+.cont:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 32px rgba(26,20,16,.12);
+  border-color: var(--gold);
+}
+
+/* Product name */
+.cont p:first-child {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* Price */
+.cont p:nth-child(2) {
+  font-size: .88rem;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  background: var(--cream);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+/* Details link */
+.cont a {
+  display: inline-block;
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+  padding: 8px 18px;
+  border: 1.5px solid var(--red);
+  border-radius: 3px;
+  transition: background .18s, color .18s;
+  white-space: nowrap;
+}
+
+.cont a:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+/* ─── Add Button ─────────────────────────────────────────────── */
+a.ajouter {
+  display: inline-block;
+  margin: 40px 60px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ink);
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+  transition: background .22s;
+}
+
+a.ajouter::before {
+  content: '+';
+  font-size: 1.3rem;
+  line-height: 1;
+  margin-right: 10px;
+  display: inline-block;
+  transition: transform .2s ease;
+}
+
+a.ajouter:hover {
+  background: var(--red);
+}
+
+a.ajouter:hover::before {
+  transform: rotate(90deg);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  body > h2 { padding: 28px 24px 26px; }
+  body > h2::after { display: none; }
+
+  .cont {
+    grid-template-columns: 1fr;
+    margin: 0 16px;
+    padding: 18px 20px;
+    gap: 10px;
+  }
+
+  .cont:hover { transform: none; }
+
+  .cont a { width: fit-content; }
+
+  a.ajouter { margin: 32px 16px 0; }
+
+  .succ { margin: 20px 16px 0; }
+}
