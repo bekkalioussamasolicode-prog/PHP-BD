@@ -14,7 +14,18 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        .cont {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .total {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
     <title>Gestion des produits</title>
 </head>
 
@@ -28,9 +39,10 @@ try {
             <p>Prix <?= htmlspecialchars($p["prix"]) ?> DH</p>
             <a href="details.php?id=<?= $p['id'] ?>">Details</a>
             <a href="delete.php?id=<?= $p['id'] ?>">Supprimer</a>
+            <a href="modifier.php?id=<?= $p['id'] ?>">Modifier</a>
         </div>
     <?php endforeach; ?>
-    <p>Total des produits : <?= count($produits) ?></p>
+    <p class="total">Total des produits : <?= count($produits) ?></p>
 </body>
 
 </html>
