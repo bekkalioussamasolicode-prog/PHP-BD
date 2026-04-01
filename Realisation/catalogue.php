@@ -25,12 +25,44 @@ try {
             font-weight: bold;
             color: green;
         }
+
+        .ajouter {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .ajouter:hover {
+            background-color: #45a049;
+        }
+
+        .succ {
+            color: green;
+            font-weight: bold;
+        }
+
+        .cont a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .cont a:hover {
+            text-decoration: underline;
+        }
     </style>
     <title>Gestion des produits</title>
 </head>
 
 <body>
     <h2>Marjane</h2>
+    <?php if (isset($_GET["succ"])) {
+        echo "<p class ='succ'>Produit ajouté avec succès</p>";
+    } ?>
 
     </form>
     <?php foreach ($produits as $p): ?>
@@ -43,6 +75,7 @@ try {
         </div>
     <?php endforeach; ?>
     <p class="total">Total des produits : <?= count($produits) ?></p>
+    <a href="ajouter-produit.php" class="ajouter">Ajouter une produit</a>
 </body>
 
 </html>
